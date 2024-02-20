@@ -1,7 +1,7 @@
 import CoreData
 
 
-public protocol SyncDelegate: class {
+public protocol SyncDelegate: AnyObject {
     /// Called before the JSON is used to create a new NSManagedObject.
     ///
     /// - parameter sync:        The Sync operation.
@@ -16,6 +16,8 @@ public protocol SyncDelegate: class {
 @objcMembers
 @objc public class Sync: Operation {
     public weak var delegate: SyncDelegate?
+    
+    public static var analytics: AnalyticsProvidable.Type?
 
     public struct OperationOptions: OptionSet {
         public let rawValue: Int
@@ -148,6 +150,10 @@ public protocol SyncDelegate: class {
 
     class func changes(_ changes: [[String: Any]], inEntityNamed entityName: String, predicate: NSPredicate?, parent: NSManagedObject?, parentRelationship: NSRelationshipDescription?, inContext context: NSManagedObjectContext, operations: Sync.OperationOptions, shouldContinueBlock: (() -> Bool)?, objectJSONBlock: ((_ objectJSON: [String: Any]) -> [String: Any])?) throws {
         guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else { fatalError("Entity named \(entityName) not found.") }
+        
+        if let analytics = analytics {
+            analytics.track(event: "sync_changes", params: ["entityName": entityName, "parentName": parent?.entity.name ?? "none"])
+        }
 
         let localPrimaryKey = entity.sync_localPrimaryKey()
         let remotePrimaryKey = entity.sync_remotePrimaryKey()
