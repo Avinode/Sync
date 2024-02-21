@@ -152,7 +152,10 @@ public protocol SyncDelegate: AnyObject {
         guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else { fatalError("Entity named \(entityName) not found.") }
         
         if let analytics = analytics {
-            analytics.track(event: "sync_changes", params: ["entityName": entityName, "parentName": parent?.entity.name ?? "none"])
+            analytics.track(event: "sync_changes",
+                            params: ["entityName": entityName,
+                                     "parentName": parent?.entity.name ?? "none",
+                                     "operations": operations.analyticsString])
         }
 
         let localPrimaryKey = entity.sync_localPrimaryKey()
