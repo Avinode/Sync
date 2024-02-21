@@ -1082,6 +1082,7 @@
 		60802B5321E40A3500307B88 /* update-ordered-many-to-many.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "update-ordered-many-to-many.xcdatamodel"; sourceTree = "<group>"; };
 		60802B5921E411C500307B88 /* inital-ordered-many-to-many-update.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "inital-ordered-many-to-many-update.json"; sourceTree = "<group>"; };
 		CA3513742B7E99D500EF3636 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		CAC29BCF2B86880F0097C084 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		CC86E0A020216FCC00AA0947 /* 413.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = 413.xcdatamodel; sourceTree = "<group>"; };
 		CC86E0A420216FF300AA0947 /* primary-key-organizations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "primary-key-organizations.json"; sourceTree = "<group>"; };
 		CC86E0A520216FF300AA0947 /* 447.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 447.json; sourceTree = "<group>"; };
@@ -1489,6 +1490,7 @@
 				14C0AF811BD6D4230009ECBE /* CHANGELOG.md */,
 				14C0AF821BD6D4230009ECBE /* CONTRIBUTING.md */,
 				14C0AF831BD6D4230009ECBE /* README.md */,
+				CAC29BCF2B86880F0097C084 /* Package.swift */,
 			);
 			name = Metadata;
 			sourceTree = "<group>";
@@ -2763,7 +2765,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = club.syncdb.sync;
@@ -2793,7 +2795,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = club.syncdb.sync;
