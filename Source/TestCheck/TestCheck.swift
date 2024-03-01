@@ -30,7 +30,7 @@ import Foundation
 
 @objc public class TestCheck: NSObject {
     
-    static var testCheck = true
+    public static var testCheck = true
     
     /**
      Method to check wheter your on testing mode or not.
