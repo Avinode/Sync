@@ -13,6 +13,10 @@ public protocol SyncDelegate: AnyObject {
     func sync(_ sync: Sync, willInsert json: [String: Any], in entityNamed: String, parent: NSManagedObject?) -> [String: Any]
 }
 
+enum SyncError: Error {
+    case relationshipMissingId
+}
+
 @objcMembers
 @objc public class Sync: Operation {
     public weak var delegate: SyncDelegate?
@@ -195,7 +199,14 @@ public protocol SyncDelegate: AnyObject {
             let changeIDs = (changes as NSArray).value(forKey: parentRelationship.destinationEntity!.sync_remotePrimaryKey()) as! NSArray
             
             for case let safeObject as NSManagedObject in objects.array {
-                let currentID = safeObject.value(forKey: safeObject.entity.sync_localPrimaryKey())!
+                guard let currentID = safeObject.value(forKey: safeObject.entity.sync_localPrimaryKey()) else {
+                    if let analytics = Sync.analytics {
+                        let className = entity.managedObjectClassName ?? "?"
+                        analytics.track(error: SyncError.relationshipMissingId, params: ["className": className,
+                                                                                         "parentRelationshipName": parentRelationship.name])
+                    }
+                    continue
+                }
                 let remoteIndex = changeIDs.index(of: currentID)
                 let relatedObjects = parent.mutableOrderedSetValue(forKey: parentRelationship.name)
                 
